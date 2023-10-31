@@ -1,0 +1,37 @@
+name: Verify
+
+on:
+  pull_request:
+env:
+  NODE_VERSION: 18.x
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+
+      - name: Configure package manager
+        run: |
+          npm config set '//registry.npmjs.org/:_authToken' ${{ env.NPM_TOKEN }}
+          yarn config set npmAuthToken ${{ env.NPM_TOKEN }}
+          npm whoami
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Test
+        run: yarn test:cov

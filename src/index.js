@@ -1,52 +1,6 @@
 import { readFile } from "fs/promises";
 import ast from "abstract-syntax-tree";
 
-// minimal evaluation path of boolean values
-const potentialValues = [
-  [true, true],
-  [true, false],
-  [false, true],
-  [false, false],
-];
-
-function buildTruthTable(symbol) {
-  // symbol: ||, &&
-  // take the number of boolean values
-  const result = [];
-  const possibleValues = variableNum;
-  // cycle through possible values for p and q
-  // log each set of values to avoid duplicates
-  // add a record to result
-  // determine possible combinations
-
-  /**
-   * take this example:
-   * a || b && c || b
-   *
-   * assumption on steps
-   * 1. a || b = z
-   * 2. c || b = y
-   * 3. z && y
-   */
-
-  for (let i = 0; i < possibleValues; i++) {}
-  result.push({
-    p: true,
-    o: "&&",
-    q: false,
-    r: false,
-  });
-}
-
-const calculateLogicalComplexityMultiplier = () => {
-  // generate a truth table for the logical operation
-  // assumption -> all nodes in a logical expression
-  // will reduce to a true / false
-  // the multiplier is the amount of rows in a logical expression's truth table
-  // each row represents a different test case required to test
-  return 1;
-};
-
 const typesAddingComplexity = [
   "IfStatement",
   "TryStatement",
@@ -73,7 +27,7 @@ function increasesComplexity(node) {
     node.type === "LogicalExpression" &&
     (node.operator === "||" || node.operator === "&&" || node.operator === "??")
   ) {
-    return [true, calculateLogicalComplexityMultiplier(node)];
+    return [true, 1];
   }
 
   return [false, 0];
@@ -124,7 +78,6 @@ function determineLogicalComplexity(bodyInput) {
       if (!resolvedBody) continue;
       const [shouldIncrease] = increasesComplexity(node);
       if (shouldIncrease) {
-        console.log("increasing", node);
         complexity++;
       }
       const nodeBody = resolvedBody(node);
@@ -137,14 +90,11 @@ function determineLogicalComplexity(bodyInput) {
     }
   }
   function findDeclarations(node, complexity) {
-    console.log(node);
     if (node.declaration) return processNodes([node.declaration]);
     if (!node.declarations) return;
 
     for (const declaration of node.declarations) {
-      console.log();
       const isFunction = !!declaration.init?.body?.body;
-      console.log(`declaration name: ${declaration.id.name} - ${isFunction}`);
       if (declaration.init?.body?.body) {
         processNodes(declaration.init.body.body);
       }
@@ -155,12 +105,14 @@ function determineLogicalComplexity(bodyInput) {
   return complexity;
 }
 
-function calculateComplexity(tree) {
-  const complexity = determineLogicalComplexity(tree.body);
-  console.log(complexity);
+/**
+ * Calculates the Cyclomatic Complexity of a given file.
+ * 
+ * @param {string} filename 
+ * @returns {number} cyclomatic complexity
+ */
+export async function calculateComplexity(filename) {
+  const file = await readFile(filename, "utf-8");
+  const tree = ast.parse(file);
+  return determineLogicalComplexity(tree.body);
 }
-const file = await readFile(process.argv[2], "utf-8");
-const tree = ast.parse(file);
-calculateComplexity(tree);
-// const result = calculateComplexity(tree);
-// console.log(JSON.stringify(tree, undefined, 2));

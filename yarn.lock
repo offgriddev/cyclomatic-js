@@ -2,17 +2,17 @@
 # yarn lockfile v1
 
 
-abstract-syntax-tree@^2.20.6:
-  version "2.20.6"
-  resolved "https://registry.yarnpkg.com/abstract-syntax-tree/-/abstract-syntax-tree-2.20.6.tgz#399d69f8939e2c2bec3fbf6b95360c3e50ba8ac7"
-  integrity sha512-3ziZ1Z8XqERIBoe6gv1G1YOqMeEA9JkmUElVzMj4BscwpYJ82SwePXPK6RU//bDZaOzX+eTvHLm1rX+yzCJdSg==
+abstract-syntax-tree@^2.21.1:
+  version "2.21.1"
+  resolved "https://registry.yarnpkg.com/abstract-syntax-tree/-/abstract-syntax-tree-2.21.1.tgz#7d1cdbc651c9a4f57240b9665e151fd32c7dc830"
+  integrity sha512-RP/n3s6gqZj7ZhstZtgxLCNws6riVxw+CYjQRyXq6RmLhndsBW0a+arwlGAkJjeH7Jp6+40rxoveAOCBRBF6ZA==
   dependencies:
     ast-types "0.14.2"
-    astring "^1.8.1"
-    esquery "^1.4.0"
-    estraverse "^5.3.0"
-    meriyah "^4.2.1"
-    source-map "0.7.3"
+    astring "^1.8.6"
+    esquery "^1.5.0"
+    meriyah "^4.3.7"
+    pure-conditions "^1.2.1"
+    source-map "^0.7.4"
 
 ast-types@0.14.2:
   version "0.14.2"
@@ -21,34 +21,39 @@ ast-types@0.14.2:
   dependencies:
     tslib "^2.0.1"
 
-astring@^1.8.1:
-  version "1.8.5"
-  resolved "https://registry.yarnpkg.com/astring/-/astring-1.8.5.tgz#d5b95ce508e8987e32ab14ee62b4a0ac21de6938"
-  integrity sha512-TuBbdn7jWVzf8dmFGTaRpW8qgANtWLi1qJLnkfGO5uVf6jf9f/F4B1H35tnOI+qVYZo3p3i8WZlbZOuPAE0wEA==
+astring@^1.8.6:
+  version "1.8.6"
+  resolved "https://registry.yarnpkg.com/astring/-/astring-1.8.6.tgz#2c9c157cf1739d67561c56ba896e6948f6b93731"
+  integrity sha512-ISvCdHdlTDlH5IpxQJIex7BWBywFWgjJSVdwst+/iQCoEYnyOaQ95+X1JGshuBjGp6nxKUy1jMgE3zPqN7fQdg==
 
-esquery@^1.4.0:
+esquery@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/esquery/-/esquery-1.5.0.tgz#6ce17738de8577694edd7361c57182ac8cb0db0b"
   integrity sha512-YQLXUplAwJgCydQ78IMJywZCceoqk1oH01OERdSAJc/7U2AylwjhSCLDEtqwg811idIS/9fIU5GjG73IgjKMVg==
   dependencies:
     estraverse "^5.1.0"
 
-estraverse@^5.1.0, estraverse@^5.3.0:
+estraverse@^5.1.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-5.3.0.tgz#2eea5290702f26ab8fe5370370ff86c965d21123"
   integrity sha512-MMdARuVEQziNTeJD8DgMqmhwR11BRQ/cBP+pLtYdSTnf3MIO8fFeiINEbX36ZdNlfU/7A9f3gUw49B3oQsvwBA==
 
-meriyah@^4.2.1:
+meriyah@^4.3.7:
   version "4.3.7"
   resolved "https://registry.yarnpkg.com/meriyah/-/meriyah-4.3.7.tgz#f931998e7b608a2c8dd4ad3bb4039819db234bb9"
   integrity sha512-JAlSOUqFU/rmLy2CEdZO5hN5E5dyUj1f4AlRR4GCQMjfobvd5lcm9JLkrqq0MgVaLQ/Zur590A+0RyUZhj0b5A==
 
-source-map@0.7.3:
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.3.tgz#5302f8169031735226544092e64981f751750383"
-  integrity sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
+pure-conditions@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/pure-conditions/-/pure-conditions-1.2.1.tgz#de3717e2bd9b6eae07b6c68257cfa3332818ffef"
+  integrity sha512-MKk7sKQiR3Fe3bL/QedUZ1eVoNO0xpOCyiTGdVrK+4ZCDa9TgwNp6D/U1FthjhVGS9a857BS84WncvZvOYECUw==
+
+source-map@^0.7.4:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.4.tgz#a9bbe705c9d8846f4e08ff6765acf0f1b0898656"
+  integrity sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==
 
 tslib@^2.0.1:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.5.2.tgz#1b6f07185c881557b0ffa84b111a0106989e8338"
-  integrity sha512-5svOrSA2w3iGFDs1HibEVBGbDrAY82bFQ3HZ3ixB+88nsbsWQoKqDRb5UBYAUPEzbBn6dAp5gRNXglySbx1MlA==
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.2.tgz#703ac29425e7b37cd6fd456e92404d46d1f3e4ae"
+  integrity sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==
