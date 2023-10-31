@@ -55,15 +55,17 @@ const typesAddingComplexity = [
   "ForInStatement",
   "ForOfStatement",
   "ForStatement",
-  "SwitchStatement",
   "BinaryExpression",
-  //  "SwitchCase",
   "WhileStatement",
   "ConditionalExpression",
 ];
 
 function increasesComplexity(node) {
   if (typesAddingComplexity.includes(node.type)) {
+    return [true, 1];
+  }
+
+  if (node.type === "SwitchCase" && node.consequent?.length > 0) {
     return [true, 1];
   }
 
@@ -82,10 +84,11 @@ const resolveBody = {
   TryStatement: (node) => [node?.block?.body, node.handler.body.body],
   TryStatementHandler: (node) => [],
   LogicalExpression: (node) => [[node.left], [node.right]],
-  ForStatement: (node) => [],
-  ForOfStatement: (node) => [],
-  ForInStatement: (node) => [],
-  SwitchStatement: (node) => [],
+  ForStatement: (node) => [node.body],
+  ForOfStatement: (node) => [node.body],
+  ForInStatement: (node) => [node.body],
+  SwitchStatement: (node) => [node.cases],
+  SwitchCase: (node) => [node.body],
   WhileStatement: (node) => [],
   BinaryExpression: (node) => [],
   IfStatement: (node) => [
@@ -110,8 +113,6 @@ function determineLogicalComplexity(bodyInput) {
     for (const node of body) {
       if (node.type === "ExportNamedDeclaration") {
         complexity = 1; // reset clock on each function
-        console.log(node);
-        console.log(`export name: ${node.id.lk}`);
         if (node.declaration.type === "FunctionDeclaration") {
           processNodes([node.declaration.body]);
         } else {
@@ -119,6 +120,7 @@ function determineLogicalComplexity(bodyInput) {
         }
       }
       const resolvedBody = resolveBody[node.type];
+      console.log(node)
       if (!resolvedBody) continue;
       const [shouldIncrease] = increasesComplexity(node);
       if (shouldIncrease) {
@@ -149,38 +151,7 @@ function determineLogicalComplexity(bodyInput) {
     }
   }
   processNodes(bodyInput);
-  // if (node.type === "SwitchCase" || node.type === "SwitchStatement") {
-  //   console.log(JSON.stringify(node, undefined, 2));
-  // }
 
-  // if (node.handler?.type === "CatchClause") {
-  //   complexity++;
-  //   determineLogicalComplexity(node.handler.body.body, complexity);
-  // }
-
-  // if (node.type === "TryStatement") {
-  //   determineLogicalComplexity(node.block.body, complexity);
-  //   determineLogicalComplexity([node.handler?.body?.body]);
-  // }
-
-  // if (node.type === "LogicalExpression") {
-  //   determineLogicalComplexity([node.left], complexity);
-  //   determineLogicalComplexity([node.right], complexity);
-
-  //   if (node.operator === "||" || node.operator === "&&") {
-  //     complexity++;
-  //   }
-  // }
-
-  // if (node.type === "IfStatement") {
-  //   determineLogicalComplexity([node.test], complexity);
-  //   // consequent and alternate are BlockStatement nodes
-  //   determineLogicalComplexity(node.consequent.body, complexity);
-  //   if (node?.alternate?.body) {
-  //     complexity++;
-  //     determineLogicalComplexity(node.alternate.body, complexity);
-  //   }
-  // }
   return complexity;
 }
 
@@ -188,7 +159,6 @@ function calculateComplexity(tree) {
   const complexity = determineLogicalComplexity(tree.body);
   console.log(complexity);
 }
-console.log(process.argv[2]);
 const file = await readFile(process.argv[2], "utf-8");
 const tree = ast.parse(file);
 calculateComplexity(tree);
