@@ -1,12 +1,27 @@
 {
   "name": "complexity-js",
   "description": "A library to provide the Cyclomatic Complexity of Vanilla JS codebases",
-  "version": "0.0.0",
-  "files": ["src/index.js"],
-  "main": "index.js",
+  "version": "0.0.0--development",
+  "files": [
+    "src/index.js"
+  ],
+  "main": "src/index.js",
+  "engines": {
+    "node": "^18"
+  },
+  "scripts": {
+    "format": "prettier --write **/*.js",
+    "lint": "eslint .",
+    "test": "node --test"
+  },
   "type": "module",
   "license": "MIT",
   "dependencies": {
     "abstract-syntax-tree": "^2.21.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
+    "prettier": "^3.0.3"
   }
 }
