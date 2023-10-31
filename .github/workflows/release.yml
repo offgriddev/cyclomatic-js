@@ -36,7 +36,7 @@ jobs:
         run: yarn lint
 
       - name: Test
-        run: yarn test:cov
+        run: yarn test
 
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v2
