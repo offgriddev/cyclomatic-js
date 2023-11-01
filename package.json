@@ -1,7 +1,7 @@
 {
-  "name": "complexity-js",
+  "name": "@offgriddev/complexity-js",
   "description": "A library to provide the Cyclomatic Complexity of Vanilla JS codebases",
-  "version": "0.0.0--development",
+  "version": "0.0.0-development",
   "files": [
     "src/index.js"
   ],
