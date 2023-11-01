@@ -85,12 +85,11 @@ function determineLogicalComplexity(bodyInput) {
       }
     }
   }
-  function findDeclarations(node, complexity) {
+  function findDeclarations(node) {
     if (node.declaration) return processNodes([node.declaration])
     if (!node.declarations) return
 
     for (const declaration of node.declarations) {
-      const isFunction = !!declaration.init?.body?.body
       if (declaration.init?.body?.body) {
         processNodes(declaration.init.body.body)
       }
