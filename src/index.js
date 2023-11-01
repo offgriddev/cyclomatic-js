@@ -9,7 +9,6 @@ const typesAddingComplexity = [
   'ForInStatement',
   'ForOfStatement',
   'ForStatement',
-  'BinaryExpression',
   'WhileStatement',
   'ConditionalExpression'
 ]
@@ -34,20 +33,19 @@ const resolveBody = {
   TryStatement: node => [node?.block?.body, node.handler.body.body],
   TryStatementHandler: node => [],
   LogicalExpression: node => [[node.left], [node.right]],
-  ForStatement: node => [node.body],
-  ForOfStatement: node => [node.body],
-  ForInStatement: node => [node.body],
+  ForStatement: node => [node.body?.body],
+  ForOfStatement: node => [node.body?.body],
+  ForInStatement: node => [node.body?.body],
   SwitchStatement: node => [node.cases],
-  SwitchCase: node => [node.body],
-  WhileStatement: node => [],
-  BinaryExpression: node => [],
+  SwitchCase: node => [node.consequent],
+  WhileStatement: node => [node.body?.body],
   IfStatement: node => [
     [node.test],
     node?.consequent?.body,
     node?.alternate?.body
   ],
-  FunctionDeclaration: node => [node.body],
-  DoWhileStatement: node => [],
+  FunctionDeclaration: node => [node.body?.body],
+  DoWhileStatement: node => [node.body?.body],
   BlockStatement: node => [node.body],
   VariableDeclaration: node => [node.declarations],
   VariableDeclarator: node => [[node.init]],
@@ -64,6 +62,7 @@ function determineLogicalComplexity(bodyInput) {
       if (node.type === 'ExportNamedDeclaration') {
         complexity = 1 // reset clock on each function
         if (node.declaration.type === 'FunctionDeclaration') {
+
           processNodes([node.declaration.body])
         } else {
           findDeclarations(node.declaration)
