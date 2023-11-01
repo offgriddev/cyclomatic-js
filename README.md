@@ -1,4 +1,4 @@
-# Cyclomatic JS
+# Cyclomatic JS - A Complexity Measurement for JavaScript
 
 Cyclomatic Complexity was developed by a Computer Scientist at IBM named Thomas McCabe in an article called ["A Complexity Measurement"](https://ieeexplore.ieee.org/document/1702388). The approach uses Graph Theory to creates a representation of the number of linear paths possible through the execution of an algorithm. It will produce a simple integer value as an assessment. For example, the following code has an objective Complexity of 2:
 
