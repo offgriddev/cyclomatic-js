@@ -52,4 +52,9 @@ describe('CyclomaticJS', () => {
     const complexity = await calculateComplexity('./examples/while.js')
     assert.equal(complexity, 2)
   })
+
+  it('logical-expression', async () => {
+    const complexity = await calculateComplexity('./examples/logical-expression.js')
+    assert.equal(complexity, 3)
+  })
 })
