@@ -5,6 +5,10 @@
   "files": [
     "src/index.js"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/offgriddev/cyclomatic-js.git"
+  },
   "main": "src/index.js",
   "engines": {
     "node": ">=18"
