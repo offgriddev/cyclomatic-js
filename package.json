@@ -1,6 +1,6 @@
 {
   "name": "complexity-js",
-  "description": "A library to provide the Cyclomatic Complexity of Vanilla JS codebases",
+  "description": "A library to provide the Cyclomatic Complexity analysis of Vanilla JS source files",
   "version": "0.0.0-development",
   "files": [
     "src/index.js"
@@ -9,6 +9,7 @@
     "type": "git",
     "url": "git+https://github.com/offgriddev/cyclomatic-js.git"
   },
+  "keywords": ["cyclomatic", "complexity", "metrics", "modularization"],
   "main": "src/index.js",
   "engines": {
     "node": ">=18"

@@ -70,7 +70,6 @@ function determineLogicalComplexity(bodyInput) {
         }
       }
       const resolvedBody = resolveBody[node.type]
-      console.log(node)
       if (!resolvedBody) continue
       const [shouldIncrease] = increasesComplexity(node)
       if (shouldIncrease) {
