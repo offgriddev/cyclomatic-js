@@ -1,8 +1,8 @@
-import {describe, it, beforeEach} from 'node:test'
+import {describe, it} from 'node:test'
 import assert from 'node:assert/strict'
 import {calculateComplexity} from './index.js'
 
-describe('CyclomaticJS', () => {
+describe('calculateComplexity', () => {
   it('simple-source', async () => {
     const complexity = await calculateComplexity('./examples/simple-source.js')
     assert.deepEqual(complexity, {
