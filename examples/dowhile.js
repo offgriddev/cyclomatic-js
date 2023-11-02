@@ -1,5 +1,5 @@
 export function doWhile() {
-  do { } while (false)
+  do {} while (false)
 }
 
 // 2

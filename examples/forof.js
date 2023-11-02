@@ -1,5 +1,6 @@
 export function _forOf() {
-  for(const a of []) {}
+  for (const a of []) {
+  }
 }
 
 // 2

@@ -32,70 +32,65 @@ const resolveBody = {
   CatchClause: node => [node.handler.body.body],
   TryStatement: node => [node?.block?.body, node.handler.body.body],
   TryStatementHandler: node => [],
-  LogicalExpression: node => [[node.left], [node.right]],
+  LogicalExpression: node => [node.left, node.right],
   ForStatement: node => [node.body?.body],
   ForOfStatement: node => [node.body?.body],
   ForInStatement: node => [node.body?.body],
-  SwitchStatement: node => [node.cases],
+  SwitchStatement: node => node.cases,
   SwitchCase: node => [node.consequent],
   WhileStatement: node => [node.body?.body],
   IfStatement: node => [
-    [node.test],
+    node.test,
     node?.consequent?.body,
     node?.alternate?.body
   ],
-  FunctionDeclaration: node => [node.body?.body],
+  FunctionDeclaration: node => [node.declaration.body?.body],
   DoWhileStatement: node => [node.body?.body],
   BlockStatement: node => [node.body],
   VariableDeclaration: node => [node.declarations],
-  VariableDeclarator: node => [[node.init]],
+  VariableDeclarator: node => [node.init],
   ConditionalExpression: node => [
     [node.test],
     [node.consequent],
     [node.alternate]
-  ]
+  ],
+  ArrowFunctionExpression: node => node.body.body,
+  ExpressionStatement: node => node.expression.arguments,
+  ExportNamedDeclaration: node => [node.declaration],
+  ExportDefaultDeclaration: node => [node.declaration]
 }
-function determineLogicalComplexity(bodyInput) {
-  let complexity = 1 // default to complexity of one because every function has at minimal one path through
-  function processNodes(body) {
-    for (const node of body) {
-      if (node.type === 'ExportNamedDeclaration') {
-        complexity = 1 // reset clock on each function
-        if (node.declaration.type === 'FunctionDeclaration') {
 
-          processNodes([node.declaration.body])
-        } else {
-          findDeclarations(node.declaration)
-        }
-      }
+const getName = (node) => {
+  return node.id.name
+}
+
+function determineLogicalComplexity(body) {
+  let complexity = 0
+  const output = {}
+  body.forEach(function cb(node) {
+    if (!node) return;
+      if (node.type === 'FunctionDeclaration') {
+        const old = complexity
+        complexity = 1 // reset clock on each function
+        node.body.body.forEach(cb)
+        const name = getName(node)
+        output[name] = complexity
+        complexity = old
+    } else {
       const resolvedBody = resolveBody[node.type]
-      if (!resolvedBody) continue
+      if (!resolvedBody) return;
       const [shouldIncrease] = increasesComplexity(node)
       if (shouldIncrease) {
-        complexity++
+        complexity += 1
       }
       const nodeBody = resolvedBody(node)
       if (nodeBody) {
-        for (const nb of nodeBody) {
-          if (!nb) continue
-          processNodes(nb)
-        }
+        nodeBody.forEach(cb)
       }
     }
-  }
-  function findDeclarations(node) {
-    if (node.declaration) return processNodes([node.declaration])
-    if (!node.declarations) return
+  })
 
-    for (const declaration of node.declarations) {
-      if (declaration.init?.body?.body) {
-        processNodes(declaration.init.body.body)
-      }
-    }
-  }
-  processNodes(bodyInput)
-
-  return complexity
+  return output
 }
 
 /**

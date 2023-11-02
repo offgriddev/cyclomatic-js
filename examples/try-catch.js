@@ -1,5 +1,6 @@
 export function tryCatch() {
-  try { } catch {}
+  try {
+  } catch {}
 }
 
 // 3

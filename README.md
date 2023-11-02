@@ -1,6 +1,8 @@
-# Cyclomatic JS - A Complexity Measurement for JavaScript
+# CyclomaticJS - A Complexity Measurement for JavaScript
 
-Cyclomatic Complexity was developed by a Computer Scientist at IBM named Thomas McCabe in an article titled [A Complexity Measurement](https://ieeexplore.ieee.org/document/1702388). The approach uses Graph Theory to creates a representation of the number of linear paths possible through the execution of an algorithm. It will produce a simple integer value as an assessment. For example, the following code has an objective Complexity of 2:
+Cyclomatic Complexity was developed by a Computer Scientist at IBM named Thomas McCabe in an article titled [A Complexity Measurement](https://ieeexplore.ieee.org/document/1702388). A metric we often use to identify "code quality" concerns, cyclomatic complexity is a useful analytical tool for many reasons. And now it's available for Vanilla JavaScript! 
+
+If you're unfamiliar with Cyclomatic Complexity, it's an application of Graph Theory to the logical structure of algorithms. The logical structure of algorithms accounts for many constructs we leverage in software engineering: if-statements, switch-statements, for/while/forof/dowhile loops, etc. In measuring these facets of our source code, Cyclomatic Complexity measures _how many possible linear paths through a given algorithm_. It will produce a simple integer value as an assessment. For example, the following code has an objective Complexity of 2:
 
 ```javascript
 function main(a) {
