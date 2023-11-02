@@ -27,11 +27,12 @@ export async function getSourceFile(folder, includedType, excludedType) {
   return filePaths
 }
 
+/**
+ * This report leverages calculateComplexity to produce a complexity report recursively for an entire
+ * project directory
+ * @param {string} directory a given directory to analyze
+ */
 export async function generateComplexityReport(directory) {
-  /**
-   * Find all files in a subfolder
-   * find all javascript
-   */
   const include = /\.js$/
   const exclude = /\__mocks__|.test.js|Test.js/
   const sourceFiles = await getSourceFile(directory, include, exclude)
