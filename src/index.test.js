@@ -83,9 +83,7 @@ describe('CyclomaticJS', () => {
   })
 
   it('multi-export', async () => {
-    const complexity = await calculateComplexity(
-      './examples/multi-export.js'
-    )
+    const complexity = await calculateComplexity('./examples/multi-export.js')
     assert.deepEqual(complexity, {
       exportOne: 1,
       exportTwo: 2
@@ -102,9 +100,7 @@ describe('CyclomaticJS', () => {
   })
 
   it('default-export', async () => {
-    const complexity = await calculateComplexity(
-      './examples/default-export.js'
-    )
+    const complexity = await calculateComplexity('./examples/default-export.js')
     assert.deepEqual(complexity, {
       test: 1
     })

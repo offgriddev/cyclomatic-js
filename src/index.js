@@ -60,7 +60,7 @@ const resolveBody = {
   ExportDefaultDeclaration: node => [node.declaration]
 }
 
-const getName = (node) => {
+const getName = node => {
   return node.id.name
 }
 
@@ -68,17 +68,17 @@ function determineLogicalComplexity(body) {
   let complexity = 0
   const output = {}
   body.forEach(function cb(node) {
-    if (!node) return;
-      if (node.type === 'FunctionDeclaration') {
-        const old = complexity
-        complexity = 1 // reset clock on each function
-        node.body.body.forEach(cb)
-        const name = getName(node)
-        output[name] = complexity
-        complexity = old
+    if (!node) return
+    if (node.type === 'FunctionDeclaration') {
+      const old = complexity
+      complexity = 1 // reset clock on each function
+      node.body.body.forEach(cb)
+      const name = getName(node)
+      output[name] = complexity
+      complexity = old
     } else {
       const resolvedBody = resolveBody[node.type]
-      if (!resolvedBody) return;
+      if (!resolvedBody) return
       const [shouldIncrease] = increasesComplexity(node)
       if (shouldIncrease) {
         complexity += 1
