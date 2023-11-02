@@ -47,7 +47,7 @@ const resolveBody = {
   FunctionDeclaration: node => [node.declaration.body?.body],
   DoWhileStatement: node => [node.body?.body],
   BlockStatement: node => [node.body],
-  VariableDeclaration: node => [node.declarations],
+  VariableDeclaration: node => node.declarations,
   VariableDeclarator: node => [node.init],
   ConditionalExpression: node => [
     [node.test],
@@ -69,10 +69,15 @@ function determineLogicalComplexity(body) {
   const output = {}
   body.forEach(function cb(node) {
     if (!node) return
-    if (node.type === 'FunctionDeclaration') {
+    if (node.type === 'FunctionDeclaration' || (node.type === 'VariableDeclarator' && node.init.type === 'ArrowFunctionExpression')) {
       const old = complexity
       complexity = 1 // reset clock on each function
-      node.body.body.forEach(cb)
+      if (node.type === 'FunctionDeclaration') {
+        node.body.body.forEach(cb)
+      }
+      if (node.type === 'VariableDeclarator' && node.init.body.type === 'BlockStatement') {
+        node.init.body.body.forEach(cb)
+      }
       const name = getName(node)
       output[name] = complexity
       complexity = old

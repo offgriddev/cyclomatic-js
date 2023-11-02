@@ -1,7 +1,7 @@
-import {readdir} from 'fs/promises'
+import {readdir, writeFile} from 'fs/promises'
 import {calculateComplexity} from './calculate-complexity.js'
 
-export async function getSourceFile(folder, includedType, excludedType) {
+async function getSourceFile(folder, includedType, excludedType) {
   let filePaths = []
   // get contents for folder
   const paths = await readdir(folder, {withFileTypes: true})
@@ -37,10 +37,20 @@ export async function generateComplexityReport(directory) {
   const exclude = /\__mocks__|.test.js|Test.js/
   const sourceFiles = await getSourceFile(directory, include, exclude)
   const analyzedFiles = await Promise.all(
-    sourceFiles.map(async file => ({
-      file,
-      report: await calculateComplexity(file)
-    }))
+    sourceFiles.map(async file => {
+      console.log(file)
+      try {
+        return {
+          file,
+          report: await calculateComplexity(file)
+        }
+      } catch (e) {
+        return {
+          file,
+          error: 'failed to generate report for file, possible syntactical issue'
+        }
+      }
+    })
   )
   await writeFile(
     'complexity-report.json',
