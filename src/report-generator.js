@@ -41,5 +41,8 @@ export async function generateComplexityReport(directory) {
       report: await calculateComplexity(file)
     }))
   )
-  console.log(JSON.stringify(analyzedFiles, undefined, 2))
+  await writeFile(
+    'complexity-report.json',
+    JSON.stringify(analyzedFiles, undefined, 2)
+  )
 }

@@ -20,7 +20,7 @@ This library provides any JS library the ability to analyze the Cyclomatic Compl
 
 # How to Use
 
-CyclomaticJS has one named export: `calculateComplexity`
+CyclomaticJS has two export: `calculateComplexity` and `generateComplexityReport`
 
 This function takes a `filename` and calculates the logical complexity of a file's contents.
 
