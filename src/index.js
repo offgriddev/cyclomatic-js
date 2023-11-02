@@ -1,2 +1,2 @@
-export * from './calculate-complexity'
-export * from './report-generator'
+export * from './calculate-complexity.js'
+export * from './report-generator.js'
