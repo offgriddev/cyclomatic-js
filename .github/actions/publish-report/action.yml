@@ -44,7 +44,7 @@ runs:
 
     - name: Generate Code Metrics for Commit
       id: metrics
-      uses: offgriddev/cyclomatic-js@v1
+      uses: offgriddev/cyclomatic-js-action@main
       with:
         github_token: ${{ github.token }}
         event: ${{ toJson(github.event) }}
