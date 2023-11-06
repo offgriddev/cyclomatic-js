@@ -117,17 +117,25 @@ Since there are 3 possible paths through this function, the Cyclomatic Complexit
 These logical structures are Universal. Any Turing Complete language can be measured by its logical structures. The following statements and expressions unconditionally increase the complexity of a function:
 
 `IfStatement`
+
 `TryStatement`
+
 `CatchClause`
+
 `DoWhileStatement`
+
 `ForInStatement`
+
 `ForOfStatement`
+
 `WhileStatement`
+
 `ConditionalExpression`
 
 The following conditionally increase the complexity of a function:
 
 `SwitchCase` as in the `case` statement of a `SwitchStatement` increases the complexity when the `case` has statements.
+
 `LogicalExpression` increases the complexity when it is a `||`, `&&`, or `??`.
 
 ### Why Use Cyclomatic Complexity
