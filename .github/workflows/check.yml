@@ -44,6 +44,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+
+      - name: Configure package manager
+        run: |
+          npm config set '//registry.npmjs.org/:_authToken' ${{ env.NPM_TOKEN }}
+          yarn config set npmAuthToken ${{ env.NPM_TOKEN }}
+          npm whoami
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
       - name: Publish Code Metrics
         uses: ./.github/actions/publish-metrics
         with:
