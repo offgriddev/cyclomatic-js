@@ -32,10 +32,10 @@ async function getSourceFile(folder, includedType, excludedType) {
  * project directory
  * @param {string} directory a given directory to analyze
  */
-export async function generateComplexityReport(directory) {
+export async function generateComplexityReport(sha, actor, workingDirectory) {
   const include = /\.js$/
   const exclude = /\__mocks__|.test.js|Test.js/
-  const sourceFiles = await getSourceFile(directory, include, exclude)
+  const sourceFiles = await getSourceFile(workingDirectory, include, exclude)
   const analyzedFiles = await Promise.all(
     sourceFiles.map(async file => {
       try {
@@ -52,8 +52,15 @@ export async function generateComplexityReport(directory) {
       }
     })
   )
+  const report = {
+    sha,
+    actor,
+    workingDirectory,
+    totalComplexity: 0,
+    dateUtc: new Date().toUTCString()
+  }
   await writeFile(
-    'complexity-report.json',
-    JSON.stringify(analyzedFiles, undefined, 2)
+    `complexity-report-${new Date()}.json`,
+    JSON.stringify(report, undefined, 2)
   )
 }
