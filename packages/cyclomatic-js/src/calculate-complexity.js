@@ -57,7 +57,8 @@ const resolveBody = {
   ArrowFunctionExpression: node => node.body.body,
   ExpressionStatement: node => node.expression.arguments,
   ExportNamedDeclaration: node => [node.declaration],
-  ExportDefaultDeclaration: node => [node.declaration]
+  ExportDefaultDeclaration: node => [node.declaration],
+  ReturnStatement: node => [node.argument]
 }
 
 const getName = node => {

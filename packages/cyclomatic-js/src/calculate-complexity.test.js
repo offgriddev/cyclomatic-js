@@ -105,4 +105,11 @@ describe('calculateComplexity', () => {
       test: 1
     })
   })
+
+  it('ternary', async () => {
+    const complexity = await calculateComplexity('./examples/ternary.js')
+    assert.deepEqual(complexity, {
+      ternary: 2
+    })
+  })
 })
