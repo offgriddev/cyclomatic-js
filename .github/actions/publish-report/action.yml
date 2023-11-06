@@ -30,6 +30,8 @@ runs:
         NPM_TOKEN: ${{ inputs.npm-token }}
 
     - name: Install dependencies
+      id: install
+      shell: bash
       run: yarn install --immutable
 
     - uses: aws-actions/configure-aws-credentials@v1
