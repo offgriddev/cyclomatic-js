@@ -1,0 +1,60 @@
+name: Publish Cyclomatic Complexity Report
+description: For rate of production analysis, this action calculates code metrics on the repo and pushes the results to S3.
+inputs:
+  aws-access-key-id:
+    required: true
+  aws-secret-access-key:
+    required: true
+  environment:
+    required: true
+  npm-token:
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v3
+      
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'yarn'
+
+    - name: Configure package manager
+      shell: sh
+      run: |
+        npm config set '//registry.npmjs.org/:_authToken' ${{ env.NPM_TOKEN }}
+        yarn config set npmAuthToken ${{ env.NPM_TOKEN }}
+        npm whoami
+      env:
+        NPM_TOKEN: ${{ inputs.npm-token }}
+
+    - name: Install dependencies
+      id: install
+      shell: bash
+      run: yarn install --immutable
+
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ inputs.aws-access-key-id }}
+        aws-secret-access-key: ${{ inputs.aws-secret-access-key }}
+        aws-region: us-east-1
+
+    - name: Generate Code Metrics for Commit
+      id: metrics
+      uses: offgriddev/cyclomatic-js-action@main
+      with:
+        github_token: ${{ github.token }}
+        event: ${{ toJson(github.event) }}
+        includedFileTypes: .js$
+        excludedFileTypes: __mocks__|.test.js|Test.js|dist
+
+    - name: Print Result
+      shell: bash
+      run: cat ${{ steps.metrics.outputs.export_filename }}
+
+    - name: Publish Commit Analytics
+      id: publish
+      shell: bash
+      run: |
+        aws s3 sync complexity-assessment s3://cyclomatic-js-metrics-${{ inputs.environment }} --cache-control max-age=31536000
