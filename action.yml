@@ -1,0 +1,13 @@
+name: 'JavaScript Cyclomatic Complexity Reporter'
+description: 'An action for CommonJS or ESModules that prints a function-by-file report for a given directory. Use this to run analytics or aggregate SDLC metrics to drive understanding of the complexity delivered through engineering.'
+author: 'Off Grid Development'
+inputs:
+  github_token:
+    description: GitHub token
+  working_directory:
+    description: target directory for analysis
+  event:
+    description: this event
+runs:
+  using: 'node20'
+  main: 'packages/complexity-report-action/src/index.js'
