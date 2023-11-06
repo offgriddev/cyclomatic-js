@@ -1,0 +1,24 @@
+{
+  "name": "eslint-config-cyclomatic-js",
+  "version": "0.0.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/offgriddev/cyclomatic-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/offgriddev/cyclomatic-js/issues"
+  },
+  "author": {
+    "name": "Jesse Anderson",
+    "url": "https://github.com/offgriddev"
+  },
+  "main": "index.js",
+  "description": "ESLint package for CyclomaticJS",
+  "dependencies": {
+    "eslint": "^8.38.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-turbo": "^1.9.1",
+    "eslint-plugin-prettier": "latest"
+  }
+}

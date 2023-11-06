@@ -1,40 +1,47 @@
 {
-  "name": "cyclomatic-js",
-  "description": "A library to provide the Cyclomatic Complexity analysis of Vanilla JS source files",
+  "name": "cyclomatic-js-base",
+  "private": true,
+  "description": "A monorepo to provide the Cyclomatic Complexity analysis for CommonJS and ESModule JavaScript repositories",
   "version": "0.0.0-development",
-  "files": [
-    "src/index.js",
-    "src/calculate-complexity.js",
-    "src/report-generator.js"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/offgriddev/cyclomatic-js.git"
   },
+  "bugs": {
+    "url": "https://github.com/offgriddev/cyclomatic-js/issues"
+  },
+  "author": {
+    "name": "Jesse Anderson",
+    "url": "https://github.com/offgriddev"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
   "keywords": [
     "cyclomatic",
     "complexity",
     "metrics",
     "modularization"
   ],
-  "main": "src/index.js",
   "engines": {
     "node": ">=18"
   },
-  "scripts": {
-    "format": "prettier --write **/*.js",
-    "lint": "eslint .",
-    "test": "node --test"
-  },
+    "scripts": {
+      "lint": "turbo run lint --cache-dir .turbo",
+      "lint:fix": "turbo run lint:fix --cache-dir .turbo",
+      "clean": "turbo run clean --cache-dir .turbo && yarn run clean-node-modules && yarn run clean-coverage",
+      "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+      "test": "NODE_ENV=test && turbo run test --cache-dir .turbo",
+      "postinstall": "manypkg check",
+      "changeset": "changeset",
+      "release": "changeset publish"
+    },
   "type": "module",
   "license": "MIT",
   "dependencies": {
-    "abstract-syntax-tree": "^2.21.1",
-    "commander": "^11.1.0"
-  },
-  "devDependencies": {
-    "eslint": "^8.52.0",
-    "eslint-config-prettier": "^9.0.0",
-    "prettier": "^3.0.3"
+    "eslint-config-cyclomatic-js": "*",
+    "husky": "^8.0.3",
+    "prettier": "latest",
+    "turbo": "^1.9.1"
   }
 }

@@ -1,15 +1,17 @@
 {
-  "name": "cyclomatic-js",
+  "name": "cyclomatic-js-action",
   "description": "A library to provide the Cyclomatic Complexity analysis of Vanilla JS source files",
   "version": "0.0.0-development",
-  "files": [
-    "src/index.js",
-    "src/calculate-complexity.js",
-    "src/report-generator.js"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/offgriddev/cyclomatic-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/offgriddev/cyclomatic-js/issues"
+  },
+  "author": {
+    "name": "Jesse Anderson",
+    "url": "https://github.com/offgriddev"
   },
   "keywords": [
     "cyclomatic",

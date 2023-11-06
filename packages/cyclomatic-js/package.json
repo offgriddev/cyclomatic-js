@@ -11,6 +11,13 @@
     "type": "git",
     "url": "git+https://github.com/offgriddev/cyclomatic-js.git"
   },
+  "bugs": {
+    "url": "https://github.com/offgriddev/cyclomatic-js/issues"
+  },
+  "author": {
+    "name": "Jesse Anderson",
+    "url": "https://github.com/offgriddev"
+  },
   "keywords": [
     "cyclomatic",
     "complexity",

@@ -81,7 +81,7 @@ Since there are 3 possible paths through this function, the Cyclomatic Complexit
 
 ### Logical Structures that Increase Complexity
 
-These logical structures are Universal. Any Turing Complete language can be measured by its logical structures. The following type of statement in any programming language increase the complexity of a function.
+These logical structures are Universal. Any Turing Complete language can be measured by its logical structures. The following statements and expressions unconditionally increase the complexity of a function:
 
 `IfStatement`
 `TryStatement`
@@ -92,11 +92,23 @@ These logical structures are Universal. Any Turing Complete language can be meas
 `WhileStatement`
 `ConditionalExpression`
 
+The following conditionally increase the complexity of a function:
+
+`SwitchCase` as in the `case` statement of a `SwitchStatement` increases the complexity when the `case` has statements.
+`LogicalExpression` increases the complexity when it is a `||`, `&&`, or `??`.
+
+
 ### Why Use Cyclomatic Complexity
 
-There are different reasons you'll want to use CyclomaticJS. From a developer perspective, you may be concerned with Code Quality and Maintainability. You may have linting rules setup to limit the "size" if your functions, e.g. [eslint-complexity](https://eslint.org/docs/latest/rules/complexity). Some developers have a genuine interest in this as an engineering concern, and rightfully so.
+Now for the question you may have asked yourself at some point if you've made it this far and have been looking for a JavaScript library to do this analysis for you. There are two main personas this library and action are targetting: Developers and anyone concerned with _estimations_. That last persona is vague. I promise, I will get there. 
 
-If you don't believe Cyclomatic Complexity 
+From a developer perspective, you may be concerned with Code Quality and Maintainability. You may have linting rules setup to limit the "size" if your functions, e.g. [eslint-complexity](https://eslint.org/docs/latest/rules/complexity). Some developers have a genuine interest in this as an engineering concern, and rightfully so. This may be around modularization and the role of writing more simple and elegant functions. 
+
+If you don't believe Cyclomatic Complexity or nerd out on analysing the logical complexity of your code, then you may be concerned about Estimations in some sense. You might be a Project Manager, a Lead Engineer, or perhaps you work in Professional Services and are putting a bid on a job and want to be competitive _and_ realistic.
+
+That's right, you might want to give a _realistic estimation for a given software development effort_. You might, for example, be the CTO and need to report to ELT a high-level estimate for getting funding for a project. The second category is broad, but you want to provide as realistic of an estimation as you can.
+
+## Estimation 
 
 
 
