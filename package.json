@@ -26,19 +26,20 @@
   "engines": {
     "node": ">=18"
   },
-    "scripts": {
-      "lint": "turbo run lint --cache-dir .turbo",
-      "lint:fix": "turbo run lint:fix --cache-dir .turbo",
-      "clean": "turbo run clean --cache-dir .turbo && yarn run clean-node-modules && yarn run clean-coverage",
-      "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
-      "test": "NODE_ENV=test && turbo run test --cache-dir .turbo",
-      "postinstall": "manypkg check",
-      "changeset": "changeset",
-      "release": "changeset publish"
-    },
+  "scripts": {
+    "lint": "turbo run lint --cache-dir .turbo",
+    "lint:fix": "turbo run lint:fix --cache-dir .turbo",
+    "clean": "turbo run clean --cache-dir .turbo && yarn run clean-node-modules && yarn run clean-coverage",
+    "format": "prettier --write \"**/*.{js,md,json}\"",
+    "test": "NODE_ENV=test && turbo run test --cache-dir .turbo",
+    "changeset": "changeset",
+    "release": "changeset publish"
+  },
   "type": "module",
   "license": "MIT",
   "dependencies": {
+    "@changesets/changelog-github": "^0.4.8",
+    "@changesets/cli": "^2.26.1",
     "eslint-config-cyclomatic-js": "*",
     "husky": "^8.0.3",
     "prettier": "latest",

@@ -46,7 +46,8 @@ export async function generateComplexityReport(directory) {
       } catch (e) {
         return {
           file,
-          error: 'failed to generate report for file, possible syntactical issue'
+          error:
+            'failed to generate report for file, possible syntactical issue'
         }
       }
     })

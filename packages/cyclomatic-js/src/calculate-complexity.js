@@ -70,13 +70,20 @@ function determineLogicalComplexity(body) {
   const output = {}
   body.forEach(function cb(node) {
     if (!node) return
-    if (node.type === 'FunctionDeclaration' || (node.type === 'VariableDeclarator' && node.init.type === 'ArrowFunctionExpression')) {
+    if (
+      node.type === 'FunctionDeclaration' ||
+      (node.type === 'VariableDeclarator' &&
+        node.init.type === 'ArrowFunctionExpression')
+    ) {
       const old = complexity
       complexity = 1 // reset clock on each function
       if (node.type === 'FunctionDeclaration') {
         node.body.body.forEach(cb)
       }
-      if (node.type === 'VariableDeclarator' && node.init.body.type === 'BlockStatement') {
+      if (
+        node.type === 'VariableDeclarator' &&
+        node.init.body.type === 'BlockStatement'
+      ) {
         node.init.body.body.forEach(cb)
       }
       const name = getName(node)

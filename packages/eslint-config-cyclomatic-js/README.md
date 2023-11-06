@@ -1,15 +1,7 @@
-# eslint-config-squids
+# eslint-config-cyclomatic-js
 
-ESLint config for TS-based services for Giant Squids.
+ESLint config for [CyclomaticJS](https://www.github.com/offgriddev/cyclomatic-js).
 
-## Installation
+Not intended for topical use.
 
-To use, install with your latest package manager.
-
-npm:
-
-`npm i -g @rss-engineering/eslint-config-squids`
-
-yarn:
-
-`yarn global add @rss-engineering/eslint-config-squids`
+Do not rub on skin.

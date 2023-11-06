@@ -1,7 +1,6 @@
 {
   "name": "eslint-config-cyclomatic-js",
   "version": "0.0.0",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/offgriddev/cyclomatic-js.git"
