@@ -1,15 +1,13 @@
-name: Publish Code Metrics
+name: Publish Cyclomatic Complexity Report
 description: For rate of production analysis, this action calculates code metrics on the repo and pushes the results to S3.
 inputs:
   aws-access-key-id:
     required: true
   aws-secret-access-key:
     required: true
-  ci-role-arn:
-    required: true
-  ci-external-id:
-    required: true
   environment:
+    required: true
+  npm-token:
     required: true
 runs:
   using: 'composite'
@@ -29,7 +27,7 @@ runs:
         yarn config set npmAuthToken ${{ env.NPM_TOKEN }}
         npm whoami
       env:
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        NPM_TOKEN: ${{ inputs.npm-token }}
 
     - name: Install dependencies
       run: yarn install --immutable

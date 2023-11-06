@@ -38,15 +38,16 @@ jobs:
       - name: Test
         run: yarn test
 
-  publish-code-metrics:
+  publish-report:
     runs-on: ubuntu-20.04
     if: ${{ github.actor != 'dependabot[bot]' }}
     steps:
       - uses: actions/checkout@v3
 
       - name: Publish Code Metrics
-        uses: ./.github/actions/publish-metrics
+        uses: ./.github/actions/publish-report
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           environment: dev
+          npm-token: ${{ secrets.NPM_TOKEN }}
