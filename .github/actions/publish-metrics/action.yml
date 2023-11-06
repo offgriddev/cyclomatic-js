@@ -1,0 +1,39 @@
+name: Publish Code Metrics
+description: For rate of production analysis, this action calculates code metrics on the repo and pushes the results to S3.
+inputs:
+  aws-access-key-id:
+    required: true
+  aws-secret-access-key:
+    required: true
+  ci-role-arn:
+    required: true
+  ci-external-id:
+    required: true
+  environment:
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v3
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ inputs.aws-access-key-id }}
+        aws-secret-access-key: ${{ inputs.aws-secret-access-key }}
+        aws-region: us-east-1
+
+    - name: Generate Code Metrics for Commit
+      id: metrics
+      uses: offgriddev/cyclomatic-js@v1
+      with:
+        github_token: ${{ github.token }}
+        event: ${{ toJson(github.event) }}
+
+    - name: Print Result
+      shell: bash
+      run: cat ${{ steps.metrics.outputs.export_filename }}
+
+    - name: Publish Commit Analytics
+      id: publish
+      shell: bash
+      run: |
+        aws s3 sync complexity-assessment s3://cyclomatic-js-metrics-${{ inputs.environment }} --cache-control max-age=31536000
