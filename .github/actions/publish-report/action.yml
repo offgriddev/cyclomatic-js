@@ -9,6 +9,8 @@ inputs:
     required: true
   npm-token:
     required: true
+  working-directory:
+    required: true
 runs:
   using: 'composite'
   steps:
