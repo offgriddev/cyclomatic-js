@@ -1,7 +1,7 @@
 {
   "name": "cyclomatic-js",
   "description": "A library to provide the Cyclomatic Complexity analysis of Vanilla JS source files",
-  "version": "0.0.0-development",
+  "version": "1.1.4",
   "files": [
     "src/index.js",
     "src/calculate-complexity.js",
