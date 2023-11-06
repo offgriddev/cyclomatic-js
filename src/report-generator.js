@@ -38,7 +38,6 @@ export async function generateComplexityReport(directory) {
   const sourceFiles = await getSourceFile(directory, include, exclude)
   const analyzedFiles = await Promise.all(
     sourceFiles.map(async file => {
-      console.log(file)
       try {
         return {
           file,
