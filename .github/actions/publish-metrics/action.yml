@@ -23,6 +23,7 @@ runs:
         cache: 'yarn'
 
     - name: Configure package manager
+      shell: sh
       run: |
         npm config set '//registry.npmjs.org/:_authToken' ${{ env.NPM_TOKEN }}
         yarn config set npmAuthToken ${{ env.NPM_TOKEN }}
