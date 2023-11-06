@@ -10,4 +10,4 @@ inputs:
     description: this event
 runs:
   using: 'node20'
-  main: 'packages/cyclomatic-js-action/src/index.js'
+  main: 'dist/index.js'

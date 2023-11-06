@@ -9,9 +9,6 @@ node_modules
 # testing
 coverage
 
-# other
-dist
-
 # misc
 .DS_Store
 *.pem
