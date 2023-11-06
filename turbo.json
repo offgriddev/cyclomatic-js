@@ -6,7 +6,6 @@
       "outputs": ["coverage/**"]
     },
     "lint": {
-      "dependsOn": ["^build"],
       "outputs": []
     }
   }

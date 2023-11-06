@@ -1,7 +1,7 @@
 import * as core from '@actions/core'
-import { generateComplexityReport } from 'cyclomatic-js';
+import {generateComplexityReport} from 'cyclomatic-js'
 
-async function run(){
+async function run() {
   try {
     const sha = core.getInput('sha')
     const actor = core.getInput('actor')
