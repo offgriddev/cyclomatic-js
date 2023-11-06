@@ -35,6 +35,9 @@ jobs:
       - name: Lint
         run: yarn lint
 
+      - name: Test
+        run: yarn test
+
   publish-code-metrics:
     runs-on: ubuntu-20.04
     if: ${{ github.actor != 'dependabot[bot]' }}
